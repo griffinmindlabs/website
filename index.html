@@ -8,7 +8,7 @@
     <!-- Favicon & share previews -->
     <link rel="icon" type="image/png" sizes="any" href="./logo.png" />
     <link rel="apple-touch-icon" href="./logo.png" />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#0b1116" />
     <meta
       property="og:title"
       content="GriffinMind Labs | Elite Software Development"
@@ -34,17 +34,32 @@
       }
 
       :root {
-        /* Color system */
-        --bg-primary: #0a0a0a;
-        --bg-secondary: #111111;
-        --bg-tertiary: #1a1a1a;
-        --text-primary: #f4f4f5; /* zinc-100 */
-        --text-secondary: #a1a1aa; /* zinc-400 */
-        --text-muted: #71717a; /* zinc-500 */
-        --divider: rgba(255, 255, 255, 0.06);
-        --accent: #7c7fff; /* slightly desaturated indigo */
-        --accent-bright: #9497ff;
-        --accent-dim: #5f63ff;
+        /* Brand from the logo */
+        --brand-50: #f1f3f2;
+        --brand-100: #dfe5e8;
+        --brand-300: #a0c2d2;
+        --brand-400: #7bafc8;
+        --brand-500: #4caddb; /* primary */
+        --brand-600: #68b7dc; /* bright */
+        --brand-700: #588aa3; /* dim */
+
+        /* App surfaces (dark with a cool cast) */
+        --bg-primary: #0b1116;
+        --bg-secondary: #0e141b;
+        --bg-tertiary: #121a22;
+
+        /* Type */
+        --text-primary: #ecf2f4;
+        --text-secondary: #a9bcc8;
+        --text-muted: #7a8b98;
+
+        /* Brand */
+        --accent: var(--brand-500);
+        --accent-bright: var(--brand-600);
+        --accent-dim: var(--brand-700);
+
+        /* Subtle borders (tinted) */
+        --divider: color-mix(in srgb, var(--brand-400) 18%, transparent);
 
         /* Typography */
         --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui,
@@ -58,10 +73,9 @@
         --tracking-tight: -0.02em;
         --tracking-title: -0.03em;
 
-        /* Legacy gradients kept for accents only */
-        --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        /* Soft brand glow used in backgrounds */
+        --glow-1: color-mix(in srgb, var(--accent) 20%, transparent);
+        --glow-2: color-mix(in srgb, var(--accent-bright) 16%, transparent);
       }
 
       html {
@@ -138,6 +152,16 @@
       :focus-visible {
         outline: 2px dashed var(--accent);
         outline-offset: 3px;
+      }
+
+      /* Brand selection color */
+      ::selection {
+        background: color-mix(in srgb, var(--accent) 40%, transparent);
+        color: #fff;
+      }
+      ::-moz-selection {
+        background: color-mix(in srgb, var(--accent) 40%, transparent);
+        color: #fff;
       }
 
       /* Navigation */
@@ -233,7 +257,7 @@
         position: relative;
         background: radial-gradient(
           ellipse at top,
-          var(--bg-tertiary) 0%,
+          color-mix(in srgb, var(--accent) 10%, var(--bg-tertiary)) 0%,
           var(--bg-primary) 55%
         );
         overflow: hidden;
@@ -245,14 +269,10 @@
         pointer-events: none;
         background-image: radial-gradient(
             circle at 20% 80%,
-            rgba(124, 127, 255, 0.1) 0%,
+            var(--glow-1) 0%,
             transparent 50%
           ),
-          radial-gradient(
-            circle at 80% 20%,
-            rgba(148, 151, 255, 0.1) 0%,
-            transparent 50%
-          );
+          radial-gradient(circle at 80% 20%, var(--glow-2) 0%, transparent 50%);
       }
       /* Subtle watermark of the logo */
       .hero::after {
@@ -322,11 +342,13 @@
       .btn-primary {
         background: var(--accent);
         color: white;
-        box-shadow: 0 8px 28px rgba(124, 127, 255, 0.25);
+        box-shadow: 0 8px 28px
+          color-mix(in srgb, var(--accent) 35%, transparent);
       }
       .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 38px rgba(124, 127, 255, 0.35);
+        box-shadow: 0 14px 38px
+          color-mix(in srgb, var(--accent) 45%, transparent);
       }
       .btn-secondary {
         background: transparent;
@@ -381,13 +403,18 @@
       }
       .service-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 20px 40px
+          color-mix(in srgb, var(--accent) 18%, transparent);
         border-color: color-mix(in srgb, var(--accent) 30%, var(--divider));
       }
       .service-icon {
         inline-size: 56px;
         block-size: 56px;
-        background: color-mix(in srgb, var(--accent) 22%, #000);
+        background: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--accent) 24%, #000) 0%,
+          color-mix(in srgb, var(--accent-bright) 20%, #000) 100%
+        );
         border-radius: 12px;
         display: grid;
         place-items: center;
@@ -458,7 +485,8 @@
       }
       .spec-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 20px 40px rgba(99, 102, 241, 0.18);
+        box-shadow: 0 20px 40px
+          color-mix(in srgb, var(--accent) 18%, transparent);
       }
       .spec-number {
         font-family: var(--font-display);
@@ -816,6 +844,7 @@
         { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
       );
 
+      // Ensure elements are observed
       document
         .querySelectorAll(".fade-in")
         .forEach((el) => observer.observe(el));
