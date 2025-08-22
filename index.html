@@ -4,6 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GriffinMind Labs | Elite Software Development</title>
+
+    <!-- Favicon & share previews -->
+    <link rel="icon" type="image/png" sizes="any" href="./logo.png" />
+    <link rel="apple-touch-icon" href="./logo.png" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta
+      property="og:title"
+      content="GriffinMind Labs | Elite Software Development"
+    />
+    <meta
+      property="og:description"
+      content="Transforming ambitious ideas into powerful digital realities."
+    />
+    <meta property="og:image" content="logo.png" />
+    <meta property="og:type" content="website" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -151,6 +167,21 @@
         align-items: center;
       }
 
+      /* Brand: logo mark + wordmark */
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        color: inherit;
+      }
+      .logo-mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        display: block;
+        user-select: none;
+      }
       .logo {
         font-family: var(--font-display);
         font-size: 1.35rem;
@@ -205,6 +236,7 @@
           var(--bg-tertiary) 0%,
           var(--bg-primary) 55%
         );
+        overflow: hidden;
       }
       .hero::before {
         content: "";
@@ -222,6 +254,17 @@
             transparent 50%
           );
       }
+      /* Subtle watermark of the logo */
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("./logo.png") center 20% / min(38vw, 280px) no-repeat;
+        opacity: 0.06; /* very subtle */
+        pointer-events: none;
+        mix-blend-mode: lighten; /* keeps it gentle on dark bg */
+      }
+
       .hero-content {
         text-align: center;
         z-index: 1;
@@ -515,8 +558,11 @@
     <!-- Navigation -->
     <nav id="navbar">
       <div class="nav-container">
-        <div class="logo">Griffin<b>Mind</b> Labs</div>
-        <ul class="nav-links">
+        <a class="brand" href="#home" aria-label="Go to home">
+          <img class="logo-mark" src="./logo.png" alt="GriffinMind Labs logo" />
+          <span class="logo">Griffin<b>Mind</b> Labs</span>
+        </a>
+        <ul class="nav-links" aria-label="Primary">
           <li><a href="#home">Home</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#expertise">Expertise</a></li>
@@ -527,7 +573,7 @@
     </nav>
 
     <!-- Hero -->
-    <section id="home" class="hero">
+    <section id="home" class="hero" aria-label="Hero">
       <div class="hero-content">
         <div class="eyebrow">Software Development Consulting</div>
         <h1>GriffinMind Labs</h1>
@@ -705,11 +751,11 @@
               href="mailto:griffinmindlabs@protonmail.com"
               class="contact-item fade-in"
             >
-              <div class="contact-icon">✉️</div>
+              <div class="contact-icon" aria-hidden="true">✉️</div>
               <span>griffinmindlabs@protonmail.com</span>
             </a>
-            <div class="contact-item fade-in">
-              <div class="contact-icon">🌐</div>
+            <div class="contact-item fade-in" role="text">
+              <div class="contact-icon" aria-hidden="true">🌐</div>
               <span>Victoria, BC</span>
             </div>
           </div>
